@@ -1,11 +1,13 @@
 syntax = "proto3";
 
+import "validate/validate.proto";
+
 /* SearchRequest represents a search query, with pagination options to
  * indicate which results to include in the response. */
 
 message SearchRequest {
   string query = 1;
-  string email_id= 2;
+  string email_id= 2 [(validate.rules).string.email = true];
   int32 page_number = 3;  // Which page number do we want?
   int32 result_per_page = 4;  // Number of results to return per page.
 }
