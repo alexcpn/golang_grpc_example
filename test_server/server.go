@@ -13,8 +13,17 @@ import (
 type Server struct{}
 
 func (s *Server)Search(ctx context.Context, in *pb.SearchRequest) (*pb.SearchResponse, error){
-	log.Printf("Received: %v", in.EmailId)
-	return &pb.SearchResponse{SearchResponse: "some response from server " }, nil
+	log.Printf("Received Emailid: %v", in.EmailId)
+	log.Printf("Received Query: %v", in.Query)
+	
+	// Note this is the only place we use validate
+	err := in.Validate()
+	if err != nil {
+		log.Fatalf("SearchRequest validation failed: %v", err)
+	}
+	response := pb.SearchResponse{SearchResponse: "some response from server " }
+	response.Validate()
+	return &response, nil
 }
 
 
