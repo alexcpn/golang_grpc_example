@@ -1,7 +1,8 @@
 
 ## Demo for Protobuffer validation and documentation with GRPC
 
-# Using https://github.com/envoyproxy/protoc-gen-validate 
+
+#### Using https://github.com/envoyproxy/protoc-gen-validate
 
 Please read the documentation at protoc-gen-validate. Protobuffer is great in providing a
 static typed interface. However types like strings in interface is hard to 'semantically type'.
