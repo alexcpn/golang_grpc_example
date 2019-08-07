@@ -13,7 +13,8 @@ import (
 type Server struct{}
 
 func (s *Server)Search(ctx context.Context, in *pb.SearchRequest) (*pb.SearchResponse, error){
-	log.Printf("Received: %v", in.EmailId)
+	log.Printf("Received Emailid: %v", in.EmailId)
+	log.Printf("Received Query: %v", in.Query)
 	
 	// Note this is the only place we use validate
 	err := in.Validate()

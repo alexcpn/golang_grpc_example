@@ -41,7 +41,19 @@ func (m *SearchRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Query
+	if len(m.GetQuery()) > 50 {
+		return SearchRequestValidationError{
+			field:  "Query",
+			reason: "value length must be at most 50 bytes",
+		}
+	}
+
+	if !_SearchRequest_Query_Pattern.MatchString(m.GetQuery()) {
+		return SearchRequestValidationError{
+			field:  "Query",
+			reason: "value does not match regex pattern \"([A-Za-z]+) ([A-Za-z]+)*$\"",
+		}
+	}
 
 	if err := m._validateEmail(m.GetEmailId()); err != nil {
 		return SearchRequestValidationError{
@@ -161,6 +173,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SearchRequestValidationError{}
+
+var _SearchRequest_Query_Pattern = regexp.MustCompile("([A-Za-z]+) ([A-Za-z]+)*$")
 
 // Validate checks the field values on SearchResponse with the rules defined in
 // the proto definition for this message. If any rules are violated, an error

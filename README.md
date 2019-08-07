@@ -1,6 +1,8 @@
+
 ## Demo for Protobuffer validation and documentation with GRPC
 
-Using Go 1.12 version with Go 
+# Using https://github.com/envoyproxy/protoc-gen-validate
+
 
 
 # To build
