@@ -20,6 +20,7 @@ build_proto_documentation:
 	 #--doc_out=./doc --doc_opt=html,index.html 
 
 build_go:
+	cd integration_test && go test
 	cd test_server && go build
 	cd test_client && go build
 # Build inside docker	

@@ -20,6 +20,10 @@ require (
 	github.com/spf13/afero v1.2.2 // indirect
 	google.golang.org/grpc v1.22.1
 	interfaces v0.0.0
+	server v0.0.0
+
 )
 
 replace interfaces => ./interfaces
+
+replace server => ./server
