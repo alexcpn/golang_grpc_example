@@ -1,4 +1,5 @@
 # Dockerfile for gRPC Go
+# The one in Git is pretty old - updated https://github.com/grpc/grpc-docker-library/pull/69
 # Build command docker build --build-arg  http_proxy=http://10.158.100.6:8080 
 # --build-arg https_proxy=http://10.158.100.6:8080  -t grpc/go:1.12 -f Dockerfile.build .
 FROM golang:1.12
