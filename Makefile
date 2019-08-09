@@ -1,5 +1,7 @@
 
-CURRENTDIR = /home/alex/coding/golang_grpc_test
+CURRENTDIR = /home/alex/coding/golang_grpc_test #change this 
+HTTP_PROXY = http://10.158.100.6:8080 #change this as per your proxy
+
 all: get_pgv  build_proto_with_validate build_go build_proto_documentation
 
 # get the protoc validator
@@ -20,9 +22,12 @@ build_proto_documentation:
 	 #--doc_out=./doc --doc_opt=html,index.html 
 
 build_go:
+	cd integration_test && go test
 	cd test_server && go build
 	cd test_client && go build
 # Build inside docker	
-docker-build:
-	echo $(CURRENTDIR)
-	docker run --rm -it -v $(CURRENTDIR)\:/go namely/protoc-all make all
+docker-make:
+	echo $(CURRENTDIR) $(HTTP_PROXY)  $
+	docker run  --env http_proxy=$(HTTP_PROXY) --env https_proxy=$(HTTP_PROXY) \
+	--rm -it -v $(CURRENTDIR)\:/go/golang_grpc_test grpc/go:1.12 /bin/sh -c \
+	 'cd golang_grpc_test && make all'

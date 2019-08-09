@@ -9,6 +9,8 @@ import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -209,6 +211,14 @@ func (c *searchServiceClient) Search(ctx context.Context, in *SearchRequest, opt
 type SearchServiceServer interface {
 	// Method to Search a test service
 	Search(context.Context, *SearchRequest) (*SearchResponse, error)
+}
+
+// UnimplementedSearchServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedSearchServiceServer struct {
+}
+
+func (*UnimplementedSearchServiceServer) Search(ctx context.Context, req *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 
 func RegisterSearchServiceServer(s *grpc.Server, srv SearchServiceServer) {

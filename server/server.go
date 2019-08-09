@@ -1,8 +1,8 @@
-package main
+package server
 
 import (
 	"context"
-	"log"
+	 log "github.com/sirupsen/logrus"
 	 "net"
 	 "fmt"
 	"google.golang.org/grpc"
@@ -19,11 +19,15 @@ func (s *Server)Search(ctx context.Context, in *pb.SearchRequest) (*pb.SearchRes
 	// Note this is the only place we use validate
 	err := in.Validate()
 	if err != nil {
-		log.Fatalf("SearchRequest validation failed: %v", err)
+		log.Warn("SearchRequest validation failed: %v", err)
+		response := pb.SearchResponse{SearchResponse: "Invalid Inputs" }
+		response.Validate()
+		return &response, nil
+	}else {
+		response := pb.SearchResponse{SearchResponse: "Some Valid response from server " }
+		response.Validate()
+		return &response, nil
 	}
-	response := pb.SearchResponse{SearchResponse: "some response from server " }
-	response.Validate()
-	return &response, nil
 }
 
 
