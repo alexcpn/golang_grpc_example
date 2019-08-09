@@ -11,9 +11,20 @@ With the protoc-gen-validate project you can sepicfy semantic validation in the 
 Also added https://github.com/pseudomuto/protoc-gen-doc to generate better documentation
 for proto files
 
-# To build
-In a (linux) machine wich has Go installed > 1.12 and make installed (and GOPATH set)
-cd to root directory and run make
+# To build in local machine
+
+In a (linux) machine wich has Go installed > 1.12 and  
+cd to root directory and run 'make all'
+
+# To build in container
+If you just have make installed and don't have any other dependency you can build
+the same output in a Docker container
+Instead of make all, run 'make docker-make'
+
+# To build A Docker Container
+
+If you need to build a slim Docker container with Go GRPD
+run 'make docker-build'
 
 # To Test
 cd to integration_test  and run 'go test' 
