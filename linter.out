@@ -1,0 +1,6 @@
+integration_test/validation_test.go:56:46: SA1019: grpc.WithDialer is deprecated: use WithContextDialer instead  (staticcheck)
+	conn, err := grpc.DialContext(ctx,"bufnet", grpc.WithDialer(bufDialer),grpc.WithInsecure())
+	                                            ^
+integration_test/validation_test.go:80:46: SA1019: grpc.WithDialer is deprecated: use WithContextDialer instead  (staticcheck)
+	conn, err := grpc.DialContext(ctx,"bufnet", grpc.WithDialer(bufDialer),grpc.WithInsecure())
+	                                            ^

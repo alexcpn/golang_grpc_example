@@ -8,6 +8,7 @@ require (
 	github.com/Masterminds/sprig v2.20.0+incompatible // indirect
 	github.com/envoyproxy/protoc-gen-validate v0.1.0 // indirect
 	github.com/golang/protobuf v1.3.2
+	github.com/golangci/golangci-lint v1.17.1 // indirect
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/iancoleman/strcase v0.0.0-20190422225806-e506e3ef7365 // indirect

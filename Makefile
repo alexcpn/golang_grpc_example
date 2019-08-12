@@ -23,7 +23,13 @@ build_proto_documentation:
 	 #--doc_out=./doc --doc_opt=html,index.html 
 
 build_go:
-	cd integration_test && go test
+	# let us do the test, get the coverage
+	cd integration_test && go test -coverprofile=cover.out -coverpkg=server \
+	&& go tool cover -html=cover.out -o cover.html
+	#sofar so good
+	# lets run the linter
+	-go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.17.1
+	-golangci-lint run > linter.out
 	cd test_server && go build
 	cd test_client && go build
 

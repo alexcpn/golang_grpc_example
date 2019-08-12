@@ -64,7 +64,10 @@ func TestPositiveValidation(t *testing.T){
 		t.Fatalf("could not execute search: %v", err)
 	}
 	//Lets validate the respose
-	r.Validate()
+	res := r.Validate()
+	if res != nil {
+		t.Fatalf("Response validation failed: %v", err)
+	}
 	log.Printf("Greeting: %s", r.SearchResponse)
 }
 
