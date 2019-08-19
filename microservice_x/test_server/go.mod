@@ -9,6 +9,6 @@ require (
 	server v0.0.0
 )
 
-replace interfaces => ../interfaces
+replace interfaces => ../../interfaces
 
 replace server => ../server

@@ -14,12 +14,12 @@ get_pgv:
 #build_proto:
 #	protoc -I ./interfaces/ interfaces/test_server/*.proto --go_out=plugins=grpc:./gen_interfaces
 build_proto_with_validate:
-	protoc   -I interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
-	 --go_out=plugins=grpc:./interfaces   --validate_out=lang=go:./interfaces interfaces/test_server/*.proto
+	protoc   -I ../interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
+	 --go_out=plugins=grpc:./generated   --validate_out=lang=go:./generated ../interfaces/test_server/*.proto
 build_proto_documentation:
-	protoc   -I interfaces/ -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
+	protoc   -I ../interfaces/ -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
 	--plugin=protoc-gen-doc=${GOPATH}/bin/protoc-gen-doc \
-     --doc_out=./doc --doc_opt=markdown,index.md interfaces/test_server/*.proto
+     --doc_out=./doc --doc_opt=markdown,index.md ../interfaces/test_server/*.proto
 	 #--doc_out=./doc --doc_opt=html,index.html 
 
 build_go:

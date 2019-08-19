@@ -25,6 +25,6 @@ require (
 
 )
 
-replace interfaces => ./interfaces
+replace interfaces => ../interfaces
 
 replace server => ./server
