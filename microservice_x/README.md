@@ -23,7 +23,7 @@ Instead of make all, run 'make docker-make'
 
 # To build A Docker Container
 
-If you need to build a slim Docker container with Go GRPD
+If you need to build a slim Docker container with Go GRPC
 run 'make docker-build'
 
 # To Test

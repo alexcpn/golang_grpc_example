@@ -1,8 +1,4 @@
 mode: set
-server/server.go:15.94,21.16 4 1
-server/server.go:21.16,26.3 4 1
-server/server.go:26.7,30.3 3 1
-server/server.go:37.13,41.16 3 0
-server/server.go:44.2,46.37 3 0
-server/server.go:41.16,43.3 1 0
-server/server.go:46.37,48.3 1 0
+server/server.go:12.94,18.16 4 1
+server/server.go:18.16,23.3 4 1
+server/server.go:23.7,27.3 3 1

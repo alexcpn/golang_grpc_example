@@ -4,12 +4,12 @@
 FROM grpc/go:1.12 AS build
 WORKDIR /golang_grpc_test
 COPY . /golang_grpc_test
-RUN cd /golang_grpc_test && make all
+RUN cd /golang_grpc_test/microservice_x && make all
 
 # final stage
 FROM alpine
 WORKDIR /app
-COPY --from=build /golang_grpc_test/test_server/test_server /app/
+COPY --from=build /golang_grpc_test/microservice_x/test_server/test_server /app/
 # https://stackoverflow.com/questions/34729748/installed-go-binary-not-found-in-path-on-alpine-linux-docker
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 ENTRYPOINT ./test_server

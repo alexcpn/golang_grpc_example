@@ -1,14 +1,19 @@
 
 CURRENTDIR =  $(shell pwd)
+PARENTDIR = $(shell dirname $(CURRENTDIR))
+
 HTTP_PROXY = http://10.158.100.6:8080 #change this as per your proxy
 
-all: get_pgv  build_proto_with_validate build_go build_proto_documentation
+all: clean  get_pgv  build_proto_with_validate build_go build_proto_documentation
 
+clean:
+	-rm -rf generated/*.pb
 # get the protoc validator
 # https://github.com/envoyproxy/protoc-gen-validate
 get_pgv:
 # Note this is using go with modules go version 1.12
 # To make the build faster these can be added to the base Docker build imagage
+	go get github.com/golang/protobuf/protoc-gen-go@v1.2.0
 	go get  github.com/envoyproxy/protoc-gen-validate@v0.1.0
 	go get  github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.3.0
 #build_proto:
@@ -40,13 +45,13 @@ docker-build:
 	  --build-arg https_proxy=$(HTTP_PROXY)  -t grpc/go:1.12 - < Dockerfile.go_grpc.1.12 
 	# next we use the multi-stage build to build a container with the binary
 	docker build --build-arg  http_proxy=$(HTTP_PROXY) \
-	 --build-arg https_proxy=$(HTTP_PROXY)  -t go_grpc:1.0 -f  Dockerfile $(CURRENTDIR) 
+	 --build-arg https_proxy=$(HTTP_PROXY)  -t go_grpc:1.0 -f  Dockerfile $(PARENTDIR) 
 
 
 # Build inside docker with volume mapping to test locally
 docker-make:
-	echo "ENV variables check" $(CURRENTDIR) $(HTTP_PROXY)  
+	echo "ENV variables check" $(CURRENTDIR) $(HTTP_PROXY)  $(PARENTDIR)
 
 	docker run  --env http_proxy=$(HTTP_PROXY) --env https_proxy=$(HTTP_PROXY) \
-	--rm -it -v $(CURRENTDIR):/go/golang_grpc_test grpc/go:1.12 /bin/sh -c \
-	 'cd golang_grpc_test && make all'
+	--rm -it -v $(PARENTDIR):/go/golang_grpc_test grpc/go:1.12 /bin/sh -c \
+	 'cd golang_grpc_test/microservice_x && make all'

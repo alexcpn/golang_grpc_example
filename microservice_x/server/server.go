@@ -3,10 +3,7 @@ package server
 import (
 	"context"
 	 log "github.com/sirupsen/logrus"
-	 "net"
-	 "fmt"
-	"google.golang.org/grpc"
-	pb "interfaces/test_server"
+	 pb "interfaces/test_server"
 )
 
 // server is used to implement the server
@@ -31,19 +28,4 @@ func (s *Server)Search(ctx context.Context, in *pb.SearchRequest) (*pb.SearchRes
 }
 
 
-const (
-	port = ":50051"
-)
-func main() {
-	//coding/testgo# go build cassandratest && ./cassandratest -ni 10 -nq 1000000 -del=false -pno=10
-	fmt.Println("Go protobuffer test")
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
-	pb.RegisterSearchServiceServer(s, &Server{})
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
-}
+
