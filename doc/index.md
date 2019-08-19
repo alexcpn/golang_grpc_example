@@ -3,7 +3,7 @@
 
 ## Table of Contents
 
-- [test.proto](#test.proto)
+- [test_server/test.proto](#test_server/test.proto)
     - [SearchRequest](#.SearchRequest)
     - [SearchResponse](#.SearchResponse)
   
@@ -16,10 +16,10 @@
 
 
 
-<a name="test.proto"></a>
+<a name="test_server/test.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## test.proto
+## test_server/test.proto
 
 
 

@@ -1,3 +1,6 @@
+test_client/client.go:22:18: Error return value of `conn.Close` is not checked (errcheck)
+	defer conn.Close()
+	                ^
 integration_test/validation_test.go:56:46: SA1019: grpc.WithDialer is deprecated: use WithContextDialer instead  (staticcheck)
 	conn, err := grpc.DialContext(ctx,"bufnet", grpc.WithDialer(bufDialer),grpc.WithInsecure())
 	                                            ^

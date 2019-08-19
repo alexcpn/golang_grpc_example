@@ -11,15 +11,15 @@ get_pgv:
 # To make the build faster these can be added to the base Docker build imagage
 	go get  github.com/envoyproxy/protoc-gen-validate@v0.1.0
 	go get  github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.3.0
-build_proto:
-	protoc -I interfaces/ interfaces/*.proto --go_out=plugins=grpc:./interfaces
+#build_proto:
+#	protoc -I ./interfaces/ interfaces/test_server/*.proto --go_out=plugins=grpc:./gen_interfaces
 build_proto_with_validate:
 	protoc   -I interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
-	 --go_out=plugins=grpc:./interfaces   --validate_out=lang=go:./interfaces interfaces/*.proto
+	 --go_out=plugins=grpc:./interfaces   --validate_out=lang=go:./interfaces interfaces/test_server/*.proto
 build_proto_documentation:
 	protoc   -I interfaces/ -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
 	--plugin=protoc-gen-doc=${GOPATH}/bin/protoc-gen-doc \
-     --doc_out=./doc --doc_opt=markdown,index.md interfaces/*.proto
+     --doc_out=./doc --doc_opt=markdown,index.md interfaces/test_server/*.proto
 	 #--doc_out=./doc --doc_opt=html,index.html 
 
 build_go:

@@ -5,7 +5,7 @@ import (
 	"context"
 	"log"
 	"time"
-	pb "interfaces"
+	pb "interfaces/test_server"
 	"google.golang.org/grpc"
 )
 

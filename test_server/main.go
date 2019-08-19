@@ -5,7 +5,7 @@ import (
 	 "net"
 	 "fmt"
 	"google.golang.org/grpc"
-	pb "interfaces"
+	pb "interfaces/test_server"
 	server "server"
 )
 

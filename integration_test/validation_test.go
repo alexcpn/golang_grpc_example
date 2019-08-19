@@ -9,7 +9,7 @@ import (
 	"context"
 	"os"
 	"google.golang.org/grpc"
-	pb "interfaces"
+	pb "interfaces/test_server"
 	server "server"
 	"google.golang.org/grpc/test/bufconn"
 )
