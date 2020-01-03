@@ -2,7 +2,7 @@
 CURRENTDIR =  $(shell pwd)
 PARENTDIR = $(shell dirname $(CURRENTDIR))
 
-HTTP_PROXY = http://10.158.100.6:8080 #change this as per your proxy
+#HTTP_PROXY = http://10.158.100.6:8080 #change this as per your proxy
 
 all: clean  _get_deps1 _get_deps2  _build_proto_with_validate _build_go _build_proto_documentation
 
