@@ -17,4 +17,4 @@ jobs:
       uses: actions/checkout@v1
     
     - name: Build
-      run: cd golang_grpc_test/microservice_x && make all
+      run: cd microservice_x && make make_in_docker
