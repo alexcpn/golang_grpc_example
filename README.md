@@ -1,5 +1,6 @@
 
-## Demo for Protobuffer validation and documentation with GRPC
+## Protobuffer/GRPC with GO (modules) 
+#### with Proto-gen-validation and protoc-gen-doc and complete Make file 
 
 Also you can use this as a sample template to generate Go Microservices. The interfaces folder
 is kept out so that multiple microservice interfaces can be added in different directories here
