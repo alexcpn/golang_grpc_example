@@ -1,7 +1,8 @@
 # Build a slim GRPC Go Container
 # using multistage build
 # https://docs.docker.com/develop/develop-images/multistage-build/
-FROM grpc/go:1.12 AS build
+# FROM grpc/go:1.12 AS build --> Dockerfile is in docker-go1.12 folder
+FROM alexcpn/grpc-go:1.12 AS build
 WORKDIR /golang_grpc_test
 COPY . /golang_grpc_test
 RUN cd /golang_grpc_test/microservice_x && make all
