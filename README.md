@@ -45,11 +45,13 @@ cd to test_client and run the generated ./test_client
 If you just have 'make' installed and don't have any other dependency even Go you can build
 the same output in a Docker container
 First cd to microservice_x and  run 'make make_in_docker_with_vol_map'
+(note - some file permission changes after this)
 
-## To build in Windows
+### To build in Windows
 From Windows 10 onwards has docker support. You can install 'make' via Cholclatey
 (https://stackoverflow.com/a/54086635/429476) and run. 
 The shell scripts for CURRENTDIR and PARENTDIR needs to be adopted to Windows Path format
 
-
+-------------------------
+(The github ci evnets is enabled for this- you can fork - do some dummy changes and create a pull request to see the make in action https://github.com/alexcpn/golang_grpc_example/pull/5/checks?check_run_id=372118434)
 
