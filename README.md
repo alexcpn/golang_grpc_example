@@ -1,4 +1,9 @@
 
+# This Repo is Obsolete now; (as of 2022)
+
+There are lot of chages in go modules and Go in general and Go GRPC and builder tools in specific; See the new repo https://github.com/alexcpn/go_grpc_2022
+
+
 ## Protobuffer/GRPC with GO (modules) 
 #### with Proto-gen-validation and protoc-gen-doc and complete Make file 
 
@@ -53,5 +58,5 @@ From Windows 10 onwards has docker support. You can install 'make' via Cholclate
 The shell scripts for CURRENTDIR and PARENTDIR needs to be adopted to Windows Path format
 
 -------------------------
-(The github ci evnets is enabled for this- you can fork - do some dummy changes and create a pull request to see the make in action https://github.com/alexcpn/golang_grpc_example/pull/5/checks?check_run_id=372118434)
+(The github ci events is enabled for this- you can fork - do some dummy changes and create a pull request to see the make in action https://github.com/alexcpn/golang_grpc_example/pull/5/checks?check_run_id=372118434)
 

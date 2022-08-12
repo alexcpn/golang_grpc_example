@@ -1,31 +1,58 @@
 
 CURRENTDIR =  $(shell pwd)
 PARENTDIR = $(shell dirname $(CURRENTDIR))
+#HOME =  $${HOME}
+#PATH = $${PATH}
+PB_REL := https://github.com/protocolbuffers/protobuf/releases
+GOPATH = $(HOME)/go
+PATH := $(PATH):$(GOPATH)/bin:$(HOME)/.local/bin
+
+
 
 #HTTP_PROXY = http://10.158.100.6:8080 #change this as per your proxy
 
-all: clean  _get_deps1 _get_deps2  _build_proto_with_validate _build_go _build_proto_documentation
+once : install_protoc _get_deps1 _get_deps2 
+all: clean _build_proto_with_validate _build_go _build_proto_documentation
 
 clean:
-	-rm -rf generated/*.pb
+	-rm -rf generated/*
 # get the protoc validator
 # https://github.com/envoyproxy/protoc-gen-validate
+
+install_protoc:
+	$(info  HOME is  $(HOME))
+	$(info Downloading from  $(PB_REL)/download/v3.15.8/protoc-3.15.8-linux-x86_64.zip)
+	$(shell curl -LO $(PB_REL)/download/v3.15.8/protoc-3.15.8-linux-x86_64.zip)
+	-$(shell unzip protoc-3.15.8-linux-x86_64.zip -d $(HOME)/.local)
+	-$(shell protoc --version)
 _get_deps1:
 # Note this is using GO MODULES
 # after first build all below will be in Dokcer cache and build will be fast
-	go get github.com/golang/protobuf/protoc-gen-go@v1.2.0
-	go get  github.com/envoyproxy/protoc-gen-validate@v0.1.0
-	go get  github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.3.0
+
+# If you need a new version update here* and remove all the indirect dependency in go.mod file (and run go clean -modcache  if required)
+# Running this target will then update the correct indirect dependency in go.mod file
+# *https://grpc.io/docs/languages/go/quickstart/ (take the latest from here)
+
+	go get -d google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+	go get -d google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+	go get -d github.com/envoyproxy/protoc-gen-validate@v0.6.7
+	go get -d github.com/pseudomuto/protoc-gen-doc@v1.5.1
+# Go get no longer does installation after Go 1.17
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+	go install github.com/envoyproxy/protoc-gen-validate@v0.6.7
 _get_deps2:
- # You may need to keep updating the golangci - there are bugs and it is in dev    
-	-go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.22.2
+	go get -d github.com/golangci/golangci-lint@v1.48.0
 #build_proto:
 #	protoc -I ./interfaces/ interfaces/test_server/*.proto --go_out=plugins=grpc:./gen_interfaces
 _build_proto_with_validate:
-	protoc   -I ../interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
-	 --go_out=plugins=grpc:./generated   --validate_out=lang=go:./generated ../interfaces/test_server/*.proto
+	protoc   -I ../interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.6.7 \
+	 --go_out=./generated   --validate_out=lang=go:./generated ../interfaces/test_server/*.proto
+	protoc   -I ../interfaces/  -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.6.7 \
+	 --go-grpc_out=./generated   --validate_out=lang=go:./generated ../interfaces/test_server/*.proto
+
 _build_proto_documentation:
-	protoc   -I ../interfaces/ -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.1.0/ \
+	protoc   -I ../interfaces/ -I ${GOPATH}/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.6.7 \
 	--plugin=protoc-gen-doc=${GOPATH}/bin/protoc-gen-doc \
      --doc_out=./doc --doc_opt=html,index.html  ../interfaces/test_server/*.proto
 	 #--doc_out=./doc --doc_opt=markdown,index.md
